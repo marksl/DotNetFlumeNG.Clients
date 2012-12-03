@@ -1,0 +1,1 @@
+..\Avro\avrogen.exe -s flume.avdl .\
