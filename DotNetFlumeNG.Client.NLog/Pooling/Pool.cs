@@ -5,10 +5,10 @@ using System.Threading;
 
 namespace DotNetFlumeNG.Client.NLog.Pooling
 {
-    // Copied from:
+    // Based on:
     // http://stackoverflow.com/questions/2510975/c-sharp-object-pooling-pattern-implementation
     // http://pastebin.com/he1fYC29
-    public class Pool<T> : IDisposable
+    public class Pool<T> : IDisposable where T : ExpireableItem, IDisposable
     {
         private bool isDisposed;
         private readonly Func<Pool<T>, T> factory;
@@ -61,10 +61,18 @@ namespace DotNetFlumeNG.Client.NLog.Pooling
 
         public void Release(T item)
         {
-            lock (itemStore)
+            if (item.IsExpired())
             {
-                itemStore.Store(item);
+                item.Dispose();
             }
+            else
+            {
+                lock (itemStore)
+                {
+                    itemStore.Store(item);
+                }
+            }
+
             sync.Release();
         }
 
