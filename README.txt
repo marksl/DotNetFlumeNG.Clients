@@ -1,3 +1,9 @@
+This project provides NLog and log4Net sources that make it easy to connect .Net applications to FlumeNG.
+
+Limitations:
+
+Currently it uses the thrift Legacy
+
 This is a port of FlumeNG's client libraries to NLog and log4net.
 
 TODO:

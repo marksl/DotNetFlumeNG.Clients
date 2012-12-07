@@ -1,0 +1,13 @@
+﻿{Connection pooling:
+
+http://stackoverflow.com/questions/2510975/c-sharp-object-pooling-pattern-implementation
+http://pastebin.com/he1fYC29
+
+Pool<IFoo> pool = new Pool<IFoo>(PoolSize, p => new PooledFoo(p),
+    LoadingMode.Lazy, AccessMode.Circular);
+
+// Sometime later on...
+using (IFoo foo = pool.Acquire())
+{
+    foo.Test();
+}
