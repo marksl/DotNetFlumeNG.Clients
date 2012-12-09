@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("DotNetFlumeNG.Client.NLog")]
@@ -13,3 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("20c29acf-4130-4250-8cdf-99901fb39ae6")]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: CLSCompliant(true)]

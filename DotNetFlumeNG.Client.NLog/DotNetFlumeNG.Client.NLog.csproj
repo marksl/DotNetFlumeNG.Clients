@@ -7,7 +7,7 @@
     <ProjectGuid>{B1035EBF-5418-43EC-8A1C-F4FD06CC325C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetFlumeNG.Client.NLog</RootNamespace>
+    <RootNamespace>DotNetFlumeNG.Client</RootNamespace>
     <AssemblyName>DotNetFlumeNG.Client.NLog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,34 +37,33 @@
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Thrift">
       <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Collector.cs" />
-    <Compile Include="Configuration\CollectorCollection.cs" />
-    <Compile Include="Configuration\FlumeConfigurationSection.cs" />
-    <Compile Include="Configuration\FlumeNode.cs" />
-    <Compile Include="Configuration\FlumeNodeCollection.cs" />
-    <Compile Include="Configuration\Source.cs" />
-    <Compile Include="Configuration\SourceCollection.cs" />
-    <Compile Include="ExpireableThriftClient.cs" />
-    <Compile Include="FlumeTarget.cs" />
-    <Compile Include="Pooling\AccessMode.cs" />
-    <Compile Include="Pooling\ExpireableItem.cs" />
-    <Compile Include="Pooling\LoadingMode.cs" />
-    <Compile Include="Pooling\Pool.cs" />
+    <Compile Include="Core\ClientType.cs" />
+    <Compile Include="FlumeClientFactory.cs" />
+    <Compile Include="FlumeClientFactoryThrift.cs" />
+    <Compile Include="Core\IFlumeClient.cs" />
+    <Compile Include="Core\FlumeSource.cs" />
+    <Compile Include="Core\LogEvent.cs" />
+    <Compile Include="Core\LogPriority.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="NLog\NLogEventAdapter.cs" />
+    <Compile Include="NLog\FlumeTarget.cs" />
+    <Compile Include="Core\AccessMode.cs" />
+    <Compile Include="Core\LoadingMode.cs" />
+    <Compile Include="Core\Pool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Thrift\EventStatus.cs" />
     <Compile Include="Thrift\Priority.cs" />
+    <Compile Include="Thrift\ThriftClient.cs" />
+    <Compile Include="Thrift\ThriftClientPooled.cs" />
     <Compile Include="Thrift\ThriftFlumeEvent.cs" />
+    <Compile Include="Thrift\ThriftFlumeEventAdapter.cs" />
     <Compile Include="Thrift\ThriftFlumeEventServer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

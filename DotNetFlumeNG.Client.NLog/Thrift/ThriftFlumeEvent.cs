@@ -14,7 +14,7 @@ using Thrift.Protocol;
 using Thrift.Transport;
 
 [Serializable]
-internal partial class ThriftFlumeEvent : TBase
+public partial class ThriftFlumeEvent : TBase
 {
   private long _timestamp;
   private Priority _priority;
