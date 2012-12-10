@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DotNetFlumeNG.Client.Core;
 
 namespace DotNetFlumeNG.Client.Thrift
@@ -40,8 +41,10 @@ namespace DotNetFlumeNG.Client.Thrift
 
         private void SetFields(LogEvent logEvent)
         {
+            Fields = new Dictionary<string, byte[]>();
             if (logEvent.Fields != null && logEvent.Fields.Count > 0)
             {
+                
                 foreach (var i in logEvent.Fields.Keys)
                 {
                     var str = logEvent.Fields[i].ToString();

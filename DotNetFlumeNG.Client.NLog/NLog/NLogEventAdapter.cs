@@ -9,12 +9,14 @@ namespace DotNetFlumeNG.Client.NLog
 {
     public class NLogEventAdapter : LogEvent
     {
+        private readonly string _message;
         private readonly LogEventInfo _logEventInfo;
 
-        public NLogEventAdapter(LogEventInfo logEventInfo)
+        public NLogEventAdapter(string message, LogEventInfo logEventInfo)
         {
             if (logEventInfo == null) throw new ArgumentNullException("logEventInfo");
 
+            _message = message;
             _logEventInfo = logEventInfo;
         }
 
@@ -49,7 +51,7 @@ namespace DotNetFlumeNG.Client.NLog
 
         public override string Body
         {
-            get { return _logEventInfo.Message; }
+            get { return _message; }
         }
 
         public override IDictionary<object, object> Fields

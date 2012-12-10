@@ -53,7 +53,7 @@ namespace DotNetFlumeNG.Client.NLog
                 {
                     using (var client = FlumeClientFactory.CreateClient())
                     {
-                        client.Append(new NLogEventAdapter(logEvent));
+                        client.Append(new NLogEventAdapter(Layout.Render(logEvent), logEvent));
                     }
 
                     return;

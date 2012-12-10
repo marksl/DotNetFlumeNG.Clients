@@ -31,12 +31,10 @@ namespace DotNetFlumeNG.Client.NLog.Tests
             server.Close();
 
             Assert.AreEqual(1, server.ReceivedEvents.Count, "The server should receive 1 event.");
-
-            var receivedEvent = server.ReceivedEvents[0];
+            ThriftFlumeEvent receivedEvent = server.ReceivedEvents[0];
+            string actualMessage = StringHelpers.GetString(receivedEvent.Body);
             Assert.AreEqual(Priority.INFO, receivedEvent.Priority);
-            
-            // HMMM this doesn't work...
-            // Assert.AreEqual("Test Message", StringHelpers.GetString(receivedEvent.Body));
+            Assert.IsTrue(actualMessage.Contains("Test Message"));
         }
     }
 }
