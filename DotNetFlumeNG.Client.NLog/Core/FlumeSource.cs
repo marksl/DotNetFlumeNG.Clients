@@ -1,5 +1,8 @@
-﻿namespace DotNetFlumeNG.Client.Core
+﻿using NLog.Config;
+
+namespace DotNetFlumeNG.Client.Core
 {
+    [NLogConfigurationItem]
     public class FlumeSource
     {
         public string Host { get; set; }

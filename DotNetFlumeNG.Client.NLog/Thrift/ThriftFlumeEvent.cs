@@ -117,6 +117,7 @@ public partial class ThriftFlumeEvent : TBase
   public ThriftFlumeEvent() {
   }
 
+    [CLSCompliant(false)]
   public void Read (TProtocol iprot)
   {
     TField field;
@@ -192,6 +193,7 @@ public partial class ThriftFlumeEvent : TBase
     iprot.ReadStructEnd();
   }
 
+    [CLSCompliant(false)]
   public void Write(TProtocol oprot) {
     TStruct struc = new TStruct("ThriftFlumeEvent");
     oprot.WriteStructBegin(struc);

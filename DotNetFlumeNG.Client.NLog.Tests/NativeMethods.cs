@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace DotNetFlumeNG.Client.Core
+namespace DotNetFlumeNG.Client.NLog.Tests
 {
     public static class NativeMethods
     {
