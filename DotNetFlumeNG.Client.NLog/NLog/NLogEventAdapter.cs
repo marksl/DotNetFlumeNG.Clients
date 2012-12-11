@@ -1,4 +1,19 @@
-﻿using System;
+﻿// 
+//    Copyright 2013 Mark Lamley
+// 
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using DotNetFlumeNG.Client.Core;
@@ -9,8 +24,8 @@ namespace DotNetFlumeNG.Client.NLog
 {
     public class NLogEventAdapter : LogEvent
     {
-        private readonly string _message;
         private readonly LogEventInfo _logEventInfo;
+        private readonly string _message;
 
         public NLogEventAdapter(string message, LogEventInfo logEventInfo)
         {
@@ -45,7 +60,8 @@ namespace DotNetFlumeNG.Client.NLog
                 const string thisLoggingLevelIsNotSupported = "This logging level is not supported - {0}";
 
                 InternalLogger.Error(thisLoggingLevelIsNotSupported, _logEventInfo.Level);
-                throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, thisLoggingLevelIsNotSupported, _logEventInfo.Level));
+                throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
+                                                              thisLoggingLevelIsNotSupported, _logEventInfo.Level));
             }
         }
 
