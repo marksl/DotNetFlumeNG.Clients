@@ -23,11 +23,8 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         {
             var server = new MockThriftServer();
 
-            logger = LogManager.GetLogger("EndToEndTest");
             logger.Info("Test Message");
-
-            Thread.Sleep(2000);
-
+            Thread.Sleep(100);
             server.Close();
 
             Assert.AreEqual(1, server.ReceivedEvents.Count, "The server should receive 1 event.");
