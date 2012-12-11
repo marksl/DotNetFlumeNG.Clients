@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DotNetFlumeNG.Client.NLog")]
 [assembly: AssemblyDescription(".Net Flume Client Library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Made by Mark Lamley")]
+[assembly: AssemblyCompany("Mark Lamley")]
 [assembly: AssemblyProduct("DotNetFlumeNG.Client.NLog")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]

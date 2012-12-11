@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>DotNetFlumeNG NLog Client</title>
+    <authors>$author$</authors>
+    <owners>Mark Lamley</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/marksl/DotNetFlumeNG.Clients</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains an NLog appender for writing to a Flume NG Thrift source.
+    
+    It supports multiple Flume sources and connection pooling.
+    </description>
+    <copyright>Copyright 2012</copyright>
+    <tags>NLog Flume FlumeNG</tags>
+    <dependencies>
+      <dependency id="NLog" version="2.0.0" />
+      <dependency id="Thrift" version="0.9.0" />
+    </dependencies>
+  </metadata>
+</package>
