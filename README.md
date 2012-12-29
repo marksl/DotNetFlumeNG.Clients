@@ -7,13 +7,10 @@ DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to
 ## NLog 0.1.1.0 Installation
 
 1. Type the following in the Visual Studio Package Manager Console.
-
 ```
 Install-Package DotNetFlumeNG.Client.NLog
 ```
-
 2. Add the following configuration to your web.config or app.config:
-
 ```
 <configuration>
   
