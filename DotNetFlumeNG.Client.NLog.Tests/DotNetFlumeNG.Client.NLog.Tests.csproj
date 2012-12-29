@@ -43,23 +43,24 @@
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="Thrift">
       <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EndToEndTest.cs" />
+    <Compile Include="Core\FlumeSourceTests.cs" />
+    <Compile Include="Core\LogEventTests.cs" />
+    <Compile Include="Core\PoolTests.cs" />
+    <Compile Include="FlumeClientFactoryTests.cs" />
+    <Compile Include="Functional\EndToEndTest.cs" />
     <Compile Include="LogEventTests.cs" />
     <Compile Include="MockThriftServer.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="StringHelpers.cs" />
+    <Compile Include="Functional\StringHelpers.cs" />
+    <Compile Include="NLog\FlumeTargetTests.cs" />
+    <Compile Include="NLog\NLogEventAdapterTests.cs" />
+    <Compile Include="Thrift\ThriftClientTests.cs" />
     <Compile Include="TimeStampTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +74,7 @@
       <Name>DotNetFlumeNG.Client.NLog</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

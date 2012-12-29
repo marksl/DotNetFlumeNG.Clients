@@ -13,11 +13,12 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
+using System;
 using DotNetFlumeNG.Client.Core;
 using Moq;
 using NUnit.Framework;
 
-namespace DotNetFlumeNG.Client.NLog.Tests
+namespace DotNetFlumeNG.Client.NLog.Tests.Core
 {
     [TestFixture]
     public class LogEventTests
@@ -25,15 +26,32 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         [SetUp]
         public void Init()
         {
-            logEvent = new Mock<LogEvent>().Object;
+            _event = new Mock<LogEvent>().Object;
         }
 
-        private LogEvent logEvent;
+        private LogEvent _event;
 
         [Test]
-        public void HostTest()
+        public void Host_IsNotNullAndDoesNotThrowException()
         {
-            Assert.IsNotNull(logEvent.Host, "The Host should not be null.");
+            Assert.IsNotNull(_event.Host);
+        }
+
+        [Test]
+        public void Nanos_IsNotNullAndDoesNotThrowException()
+        {
+            Assert.IsNotNull(_event.Nanos);
+        }
+
+        [Test]
+        public void TimestampInMilliseconds_ModifyTimestamp_TimestampInMillisecondsUpdated()
+        {
+            long before = _event.TimestampInMilliseconds;
+
+            _event.Timestamp = DateTime.Now.Subtract(new TimeSpan(45, 0, 0, 0));
+
+            Assert.AreNotEqual(before, _event.TimestampInMilliseconds);
+            Assert.AreNotEqual(0, _event.TimestampInMilliseconds);
         }
     }
 }

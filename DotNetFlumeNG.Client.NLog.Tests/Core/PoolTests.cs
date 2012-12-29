@@ -13,13 +13,30 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System.Runtime.InteropServices;
+using DotNetFlumeNG.Client.Core;
+using NUnit.Framework;
 
-namespace DotNetFlumeNG.Client.NLog.Tests
+namespace DotNetFlumeNG.Client.NLog.Tests.Core
 {
-    public static class NativeMethods
+    [TestFixture]
+    public class PoolTests
     {
-        [DllImport("kernel32.dll")]
-        public static extern ulong GetTickCount64();
+        private class Data
+        {
+        }
+
+        private static Data Create()
+        {
+            return new Data();
+        }
+
+        [Test]
+        public void AcquireReturnToPool_HappyPath_Succeeds()
+        {
+            var data = new Pool<Data>(50, Create);
+            var t = data.Acquire();
+
+            data.ReturnToPool(t);
+        }
     }
 }

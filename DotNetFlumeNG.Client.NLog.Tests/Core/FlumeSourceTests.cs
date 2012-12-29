@@ -13,13 +13,24 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System.Runtime.InteropServices;
+using DotNetFlumeNG.Client.Core;
+using NUnit.Framework;
 
-namespace DotNetFlumeNG.Client.NLog.Tests
+namespace DotNetFlumeNG.Client.NLog.Tests.Core
 {
-    public static class NativeMethods
+    [TestFixture]
+    public class FlumeSourceTests
     {
-        [DllImport("kernel32.dll")]
-        public static extern ulong GetTickCount64();
+        [Test]
+        public void ConstructorAndProperties_Succeeds()
+        {
+            const string host = "host";
+            const int port = 1234;
+
+            var f = new FlumeSource {Host = host, Port = port};
+
+            Assert.AreEqual(host, f.Host);
+            Assert.AreEqual(port, f.Port);
+        }
     }
 }

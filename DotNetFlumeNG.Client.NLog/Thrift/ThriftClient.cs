@@ -28,6 +28,8 @@ namespace DotNetFlumeNG.Client.Thrift
 
         public ThriftClient(string host, int port)
         {
+            if (host == null) throw new ArgumentNullException("host");
+
             _transport = new TSocket(host, port);
             TProtocol protocol = new TBinaryProtocol(_transport);
             _client = new ThriftFlumeEventServer.Client(protocol);

@@ -29,6 +29,7 @@ namespace DotNetFlumeNG.Client.NLog
 
         public NLogEventAdapter(string message, LogEventInfo logEventInfo)
         {
+            if (message == null) throw new ArgumentNullException("message");
             if (logEventInfo == null) throw new ArgumentNullException("logEventInfo");
 
             _message = message;

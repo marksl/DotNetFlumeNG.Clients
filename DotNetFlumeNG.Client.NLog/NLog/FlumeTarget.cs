@@ -45,7 +45,7 @@ namespace DotNetFlumeNG.Client.NLog
         public ClientType Client { get; set; }
 
         [ArrayParameter(typeof (FlumeSource), "source")]
-        public IList<FlumeSource> FlumeSources { get; private set; }
+        public IList<FlumeSource>FlumeSources { get; private set; }
 
         protected override void InitializeTarget()
         {
@@ -58,7 +58,13 @@ namespace DotNetFlumeNG.Client.NLog
 
         protected override void Write(LogEventInfo logEvent)
         {
-            InternalLogger.Info("Write.");
+            InternalLogger.Debug("Write.");
+
+            if (logEvent.Level == LogLevel.Off)
+            {
+                InternalLogger.Debug("Off.");
+                return;
+            }
 
             int count = Retries;
 

@@ -13,13 +13,17 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System.Runtime.InteropServices;
+using System;
 
 namespace DotNetFlumeNG.Client.NLog.Tests
 {
-    public static class NativeMethods
+    internal class StringHelpers
     {
-        [DllImport("kernel32.dll")]
-        public static extern ulong GetTickCount64();
+        public static string GetString(byte[] bytes)
+        {
+            var chars = new char[bytes.Length/sizeof (char)];
+            Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+            return new string(chars);
+        }
     }
 }
