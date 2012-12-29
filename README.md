@@ -34,7 +34,8 @@ Install-Package DotNetFlumeNG.Client.NLog
     </rules>
   </nlog>
 
-</configuration>```
+</configuration>
+```
 3.  Modify your Flume .conf file. Add the ThriftLegacySource.  
 
 ```
