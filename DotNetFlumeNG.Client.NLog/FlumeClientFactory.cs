@@ -43,6 +43,15 @@ namespace DotNetFlumeNG.Client
             }
         }
 
+        public static void Close()
+        {
+            if (_pool != null)
+            {
+                _pool.Dispose();
+                _pool = null;
+            }
+        }
+
         public static IFlumeClient CreateClient()
         {
             return UsePooling ? _pool.Acquire() : CreateConnection();

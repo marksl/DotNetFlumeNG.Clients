@@ -56,6 +56,13 @@ namespace DotNetFlumeNG.Client.NLog
             base.InitializeTarget();
         }
 
+        protected override void CloseTarget()
+        {
+            FlumeClientFactory.Close();
+
+            base.CloseTarget();
+        }
+
         protected override void Write(LogEventInfo logEvent)
         {
             InternalLogger.Debug("Write.");
