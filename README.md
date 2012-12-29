@@ -6,8 +6,7 @@ DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to
 
 ## NLog 0.1.1.0 Installation
 
-1.  Type the following in the Visual Studio Package Manager Console.
-
+1.  Type the following in the Visual Studio Package Manager Console.  
 ```
 Install-Package DotNetFlumeNG.Client.NLog
 ```
@@ -35,10 +34,8 @@ Install-Package DotNetFlumeNG.Client.NLog
     </rules>
   </nlog>
 
-</configuration>
-```
-
-3. Modify your Flume .conf file. Add the ThriftLegacySource.
+</configuration>```
+3.  Modify your Flume .conf file. Add the ThriftLegacySource.  
 
 ```
 agent.sources = legacysource-1
@@ -55,11 +52,9 @@ agent.channels.memoryChannel-1.type = memory
 agent.sinks.Console.channel = memoryChannel-1
 agent.sinks.Console.type = logger
 ```
-
 Note: A good site for how to install Flume on windows can be found here: 
-http://mapredit.blogspot.ca/2012/07/run-flume-13x-on-windows.html
-
-4. Write NLog logging code as usual
+http://mapredit.blogspot.ca/2012/07/run-flume-13x-on-windows.html  
+4.  Write NLog logging code as usual  
 
 ```
 using NLog;
