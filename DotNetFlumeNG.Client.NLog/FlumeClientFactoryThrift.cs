@@ -22,17 +22,11 @@ namespace DotNetFlumeNG.Client
 {
     internal static partial class FlumeClientFactory
     {
-        private static readonly Random rand = new Random();
-
-        private static IFlumeClient CreateConnection()
+        public static IFlumeClient CreateClient()
         {
             if (_clientType == ClientType.Thrift)
             {
-                var source = _flumeSources[rand.Next(_flumeSources.Count)];
-
-                return UsePooling
-                           ? new ThriftClientPooled(_pool, source.Host, source.Port)
-                           : new ThriftClient(source.Host, source.Port);
+                return new ThriftClient(_host, _port);
             }
 
             throw new NotSupportedException(

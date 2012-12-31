@@ -36,6 +36,8 @@ namespace DotNetFlumeNG.Client.Thrift
             _transport.Open();
         }
 
+        public bool IsClosed { get { return !_transport.IsOpen; }}
+
         public void Dispose()
         {
             Dispose(true);

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{464B8AC4-1DD3-45DF-99CD-09349297B2C2}</ProjectGuid>
+    <ProjectGuid>{650950F0-FE3B-4B9B-BBA3-D54CF9863B5E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetFlumeNG.Client.NLog.Tests</RootNamespace>
-    <AssemblyName>DotNetFlumeNG.Client.NLog.Tests</AssemblyName>
+    <RootNamespace>NLog.PerformanceTests</RootNamespace>
+    <AssemblyName>NLog.PerformanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -32,11 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    <Reference Include="DotNetFlumeNG.Client.NLog">
+      <HintPath>..\packages\DotNetFlumeNG.Client.NLog.0.1.1.0\lib\net40\DotNetFlumeNG.Client.NLog.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
@@ -44,36 +43,22 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="Thrift">
       <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\FlumeSourceTests.cs" />
-    <Compile Include="Core\LogEventTests.cs" />
-    <Compile Include="FlumeClientFactoryTests.cs" />
-    <Compile Include="Functional\EndToEndTest.cs" />
-    <Compile Include="LogEventTests.cs" />
-    <Compile Include="MockThriftServer.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Functional\StringHelpers.cs" />
-    <Compile Include="NLog\FlumeTargetTests.cs" />
-    <Compile Include="NLog\NLogEventAdapterTests.cs" />
-    <Compile Include="Thrift\ThriftClientTests.cs" />
-    <Compile Include="TimeStampTests.cs" />
+    <Compile Include="PerformanceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DotNetFlumeNG.Client.NLog\DotNetFlumeNG.Client.NLog.csproj">
-      <Project>{B1035EBF-5418-43EC-8A1C-F4FD06CC325C}</Project>
-      <Name>DotNetFlumeNG.Client.NLog</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

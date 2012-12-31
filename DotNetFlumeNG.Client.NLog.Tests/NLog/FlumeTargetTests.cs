@@ -25,27 +25,19 @@ namespace DotNetFlumeNG.Client.NLog.Tests.NLog
         public void ConstructorAndProperties_WorkProperly()
         {
             const ClientType clientType = ClientType.Thrift;
-            const bool usePool = true;
-            const int poolSize = 54;
-            const int retries = 43;
-            var flumeSource = new FlumeSource {Host = "host", Port = 3};
 
+            const string host = "host";
+            const int port = 3;
             var f = new FlumeTarget
                         {
                             Client = clientType,
-                            UsePool = usePool,
-                            PoolSize = poolSize,
-                            Retries = retries
+                            Host = host,
+                            Port = port
                         };
 
-            f.FlumeSources.Add(flumeSource);
-
             Assert.AreEqual(clientType, f.Client);
-            Assert.AreEqual(usePool, f.UsePool);
-            Assert.AreEqual(poolSize, f.PoolSize);
-            Assert.AreEqual(retries, f.Retries);
-            Assert.AreEqual(flumeSource.Host, f.FlumeSources[0].Host);
-            Assert.AreEqual(flumeSource.Port, f.FlumeSources[0].Port);
+            Assert.AreEqual(host, f.Host);
+            Assert.AreEqual(port, f.Port);
         }
     }
 }

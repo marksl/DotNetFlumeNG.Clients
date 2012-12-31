@@ -39,45 +39,33 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         private MockThriftServer _mockServer;
 // ReSharper restore NotAccessedField.Local
 
-        private static void Init(bool pooling)
+        private static void Init()
         {
-            FlumeClientFactory.Init(ClientType.Thrift, pooling, 40,
-                                    new List<FlumeSource> {new FlumeSource {Host = "localhost", Port = 9090}});
+            FlumeClientFactory.Init(ClientType.Thrift, "localhost", 9090);
         }
 
         [Test]
         public void CreateClient_PoolingDisabled_ClientCreated()
         {
-            Init(pooling: false);
+            Init();
 
             using (var client = FlumeClientFactory.CreateClient())
             {
                 Assert.IsNotNull(client);
             }
         }
-
+        
         [Test]
-        public void CreateClient_WithPooling_ClientCreated()
-        {
-            Init(pooling: true);
-
-            using (var client = FlumeClientFactory.CreateClient())
-            {
-                Assert.IsNotNull(client);
-            }
-        }
-
-        [Test]
-        public void Init_FlumeSourcesNull_ThrowsArgumentNullException()
+        public void Init_HostNull_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(
-                () => FlumeClientFactory.Init(ClientType.Thrift, true, 40, null));
+                () => FlumeClientFactory.Init(ClientType.Thrift, null, 9090));
         }
 
         [Test]
         public void Init_ValidParameters_Succeeds()
         {
-            FlumeClientFactory.Init(ClientType.Thrift, true, 40, new List<FlumeSource>());
+            FlumeClientFactory.Init(ClientType.Thrift, "localhost", 9090);
         }
     }
 }

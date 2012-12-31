@@ -19,6 +19,7 @@ namespace DotNetFlumeNG.Client.Core
 {
     public interface IFlumeClient : IDisposable
     {
+        bool IsClosed { get; }
         void Append(LogEvent logEvent);
     }
 }
