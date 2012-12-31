@@ -16,14 +16,12 @@ namespace NLog.PerformanceTests
         private static MemoryStream InitConfiguration(int poolSize, int numberOfThreads, int numberOfRandomStrings = 400)
         {
             var config = new LoggingConfiguration();
-
+            
             var flumeTarget = new FlumeTarget
                                   {
                                       Client = ClientType.Thrift,
                                       Layout = "${date:format=HH\\:MM\\:ss} ${logger} ${message}",
-
                                   };
-
             if (poolSize == 0)
             {
                 flumeTarget.UsePool = false;
@@ -64,7 +62,7 @@ namespace NLog.PerformanceTests
         [Test]
         public void PoolSizeFour_FourThreads()
         {
-            var errorStream = InitConfiguration(poolSize: 4, numberOfThreads: 4, numberOfRandomStrings:);
+            var errorStream = InitConfiguration(poolSize: 4, numberOfThreads: 4, numberOfRandomStrings:4000);
 
             AssertIsEmpty(errorStream);
         }

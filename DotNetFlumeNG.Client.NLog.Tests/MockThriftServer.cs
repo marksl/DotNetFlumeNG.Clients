@@ -24,16 +24,18 @@ namespace DotNetFlumeNG.Client.NLog.Tests
     {
         private readonly Handler _handler;
         private readonly TServerTransport _serverTransport;
+        private readonly Thread _serveOnSeparateThread;
+        private readonly TThreadedServer _server;
 
         public MockThriftServer()
         {
             _handler = new Handler();
             var processor = new ThriftFlumeEventServer.Processor(_handler);
             _serverTransport = new TServerSocket(9090);
-            var server = new TThreadedServer(processor, _serverTransport);
+            _server = new TThreadedServer(processor, _serverTransport);
 
-            var serveOnSeparateThread = new Thread(server.Serve);
-            serveOnSeparateThread.Start();
+            _serveOnSeparateThread = new Thread(_server.Serve);
+            _serveOnSeparateThread.Start();
         }
 
         public List<ThriftFlumeEvent> ReceivedEvents
@@ -43,7 +45,8 @@ namespace DotNetFlumeNG.Client.NLog.Tests
 
         public void Close()
         {
-            _serverTransport.Close();
+            _server.Stop();
+
         }
 
         private class Handler : ThriftFlumeEventServer.Iface

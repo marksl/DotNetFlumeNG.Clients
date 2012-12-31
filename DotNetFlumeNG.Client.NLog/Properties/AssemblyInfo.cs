@@ -15,7 +15,6 @@
 
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("DotNetFlumeNG.Client.NLog")]
@@ -28,8 +27,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("20c29acf-4130-4250-8cdf-99901fb39ae6")]
-[assembly: AssemblyVersion("0.1.1.0")]
-[assembly: AssemblyFileVersion("0.1.1.0")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.2.0.0")]
 [assembly: CLSCompliant(true)]
-[assembly: InternalsVisibleTo("DotNetFlumeNG.Client.NLog.Tests")]
-[assembly: InternalsVisibleTo("ConsoleApplication1")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("DotNetFlumeNG.Client.NLog.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("NLogNestedConfigApp")]

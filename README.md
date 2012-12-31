@@ -4,7 +4,7 @@ Apache Flume is a distributed, reliable, and available service for efficiently c
 
 DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to flume from C# easy. It uses the Flume legacy thrift support because currently C# Avro RPC support is lacking.
 
-## NLog 0.1.1.0 Installation
+## NLog 0.2.0.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
@@ -26,9 +26,7 @@ Add the following configuration to your web.config or app.config:
       <add assembly="DotNetFlumeNG.Client.NLog" />
     </extensions>
     <targets>
-      <target name="a1" type="Flume" >
-        <source host="localhost" port="9090"></source>
-      </target>
+      <target name="a1" type="Flume" host="localhost" port="9090" />
     </targets>
     <rules>
       <logger name="*" minLevel="Info" appendTo="a1" />
@@ -36,6 +34,15 @@ Add the following configuration to your web.config or app.config:
   </nlog>
 
 </configuration>
+```
+
+Multiple flume sources are supported using NLog's Round Robin wrapper.
+```
+<target type="RoundRobinGroup" name="MultipleFlumes">
+    <target name="a1" type="Flume" host="localhost" port="9090" />
+    <target name="a2" type="Flume" host="localhost" port="9090" />
+    <target name="a3" type="Flume" host="localhost" port="9090" />
+</target>
 ```
 
 Modify your Flume .conf file. Add the ThriftLegacySource.  

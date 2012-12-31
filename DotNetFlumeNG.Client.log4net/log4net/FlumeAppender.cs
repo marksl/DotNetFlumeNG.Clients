@@ -13,48 +13,49 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System.ComponentModel;
 using DotNetFlumeNG.Client.Core;
-using NLog;
-using NLog.Targets;
+using log4net.Appender;
+using log4net.Core;
 
-namespace DotNetFlumeNG.Client.NLog
+namespace DotNetFlumeNG.Client.log4net
 {
-    [Target("Flume")]
-    public sealed class FlumeTarget : TargetWithLayout
+    public class FlumeAppender : AppenderSkeleton
     {
-        [DefaultValue(ClientType.Thrift)]
-        public ClientType Client { get; set; }
+        public FlumeAppender()
+        {
+            Client = ClientType.Thrift;
+        }
 
+        public ClientType Client { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
 
-        protected override void InitializeTarget()
+        public override void ActivateOptions()
         {
             FlumeClientFactory.Init(Client, Host, Port);
 
-            base.InitializeTarget();
+            base.ActivateOptions();
         }
 
-        protected override void Write(LogEventInfo logEvent)
+        protected override void Append(LoggingEvent logEvent)
         {
-            if (logEvent.Level == LogLevel.Off)
+            if (logEvent.Level == Level.Off)
             {
                 return;
             }
 
-            string formattedText = Layout.Render(logEvent);
-            var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent);
+            string formattedText = RenderLoggingEvent(logEvent);
+            var nLogEventAdapter = new Log4NetEventAdapter(formattedText, logEvent);
 
             var client = FlumeClientFactory.CreateClient();
             client.Append(nLogEventAdapter);
         }
 
-        protected override void CloseTarget()
+        protected override void OnClose()
         {
             FlumeClientFactory.Close();
 
-            base.CloseTarget();
+            base.OnClose();
         }
     }
 }

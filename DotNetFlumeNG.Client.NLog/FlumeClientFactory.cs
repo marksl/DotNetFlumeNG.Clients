@@ -24,6 +24,8 @@ namespace DotNetFlumeNG.Client
         private static string _host;
         private static int _port;
 
+        private static IFlumeClient _client;
+
         public static void Init(ClientType clientType, string host, int port)
         {
             if (host == null) throw new ArgumentNullException("host");
@@ -31,6 +33,15 @@ namespace DotNetFlumeNG.Client
             _clientType = clientType;
             _host = host;
             _port = port;
+        }
+
+        public static void Close()
+        {
+            if (_client != null)
+            {
+                _client.Dispose();
+                _client = null;
+            }
         }
     }
 }

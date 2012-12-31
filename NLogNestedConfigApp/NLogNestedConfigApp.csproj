@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B1035EBF-5418-43EC-8A1C-F4FD06CC325C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{2799F054-315B-4591-AF25-833CAC98376B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetFlumeNG.Client</RootNamespace>
-    <AssemblyName>DotNetFlumeNG.Client.NLog</AssemblyName>
+    <RootNamespace>NLogNestedConfigApp</RootNamespace>
+    <AssemblyName>NLogNestedConfigApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,9 +23,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,34 +39,35 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="Thrift">
       <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\ClientType.cs" />
-    <Compile Include="FlumeClientFactory.cs" />
-    <Compile Include="FlumeClientFactoryThrift.cs" />
-    <Compile Include="Core\IFlumeClient.cs" />
-    <Compile Include="Core\LogEvent.cs" />
-    <Compile Include="Core\LogPriority.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NLog\NLogEventAdapter.cs" />
-    <Compile Include="NLog\FlumeTarget.cs" />
-    <Compile Include="Core\AccessMode.cs" />
-    <Compile Include="Core\LoadingMode.cs" />
+    <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\Functional\StringHelpers.cs">
+      <Link>StringHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\MockThriftServer.cs">
+      <Link>MockThriftServer.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Thrift\EventStatus.cs" />
-    <Compile Include="Thrift\Priority.cs" />
-    <Compile Include="Thrift\ThriftClient.cs" />
-    <Compile Include="Thrift\ThriftFlumeEvent.cs" />
-    <Compile Include="Thrift\ThriftFlumeEventAdapter.cs" />
-    <Compile Include="Thrift\ThriftFlumeEventServer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetFlumeNG.Client.NLog\DotNetFlumeNG.Client.NLog.csproj">
+      <Project>{b1035ebf-5418-43ec-8a1c-f4fd06cc325c}</Project>
+      <Name>DotNetFlumeNG.Client.NLog</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

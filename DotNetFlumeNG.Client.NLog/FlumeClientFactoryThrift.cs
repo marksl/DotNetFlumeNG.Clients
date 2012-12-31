@@ -26,7 +26,12 @@ namespace DotNetFlumeNG.Client
         {
             if (_clientType == ClientType.Thrift)
             {
-                return new ThriftClient(_host, _port);
+                if (_client == null || _client.IsClosed)
+                {
+                    _client = new ThriftClient(_host, _port);
+                }
+
+                return _client;
             }
 
             throw new NotSupportedException(

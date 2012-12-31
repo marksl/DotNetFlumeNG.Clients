@@ -7,7 +7,7 @@
     <ProjectGuid>{EA4FE2E4-7D24-4A50-B51E-A963CB28CFE9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetFlumeNG.Client.log4net</RootNamespace>
+    <RootNamespace>DotNetFlumeNG.Client</RootNamespace>
     <AssemblyName>DotNetFlumeNG.Client.log4net</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -37,18 +37,58 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="Thrift">
+      <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlumeAppender.cs" />
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\AccessMode.cs">
+      <Link>Core\AccessMode.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\ClientType.cs">
+      <Link>Core\ClientType.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\IFlumeClient.cs">
+      <Link>Core\IFlumeClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\LoadingMode.cs">
+      <Link>Core\LoadingMode.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\LogEvent.cs">
+      <Link>Core\LogEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\LogPriority.cs">
+      <Link>Core\LogPriority.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\FlumeClientFactory.cs">
+      <Link>FlumeClientFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\FlumeClientFactoryThrift.cs">
+      <Link>FlumeClientFactoryThrift.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\EventStatus.cs">
+      <Link>Thrift\EventStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\Priority.cs">
+      <Link>Thrift\Priority.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftClient.cs">
+      <Link>Thrift\ThriftClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEvent.cs">
+      <Link>Thrift\ThriftFlumeEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventAdapter.cs">
+      <Link>Thrift\ThriftFlumeEventAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventServer.cs">
+      <Link>Thrift\ThriftFlumeEventServer.cs</Link>
+    </Compile>
+    <Compile Include="log4net\FlumeAppender.cs" />
+    <Compile Include="log4net\Log4NetEventAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

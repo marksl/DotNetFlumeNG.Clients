@@ -1,0 +1,20 @@
+______________________________________________
+.Net Flume Client log Change Log
+______________________________________________
+
+0.1.0 - December 11th, 2012
+
+* Initial Release
+* NLog support
+* Pushed to NuGet
+
+0.1.1 - December 29th, 2012
+
+* Added documentation
+* Cleaned up resources
+
+0.2.0 - December 30th, 2012
+
+* Simplified configuration. Removed features that are better supported with Async and RoundRobin wrappers.
+* Added initial log4net code
+* Successfully tested NLog client under heavy load
