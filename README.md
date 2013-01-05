@@ -83,6 +83,62 @@ public class MyClass
 }
 ```
 
-## log4net
+## log4net 0.2.0.0 Installation
 
-Coming soon.
+Type the following in the Visual Studio Package Manager Console.  
+
+```
+Install-Package DotNetFlumeNG.Client.log4net
+```
+
+Add the following configuration to your web.config or app.config:
+
+```
+<configuration>
+
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+    
+  <log4net>
+    
+    <appender name="FlumeAppender" type="DotNetFlumeNG.Client.log4net.FlumeAppender, DotNetFlumeNG.Client.log4net">
+      <client>Thrift</client>
+      <host>localhost</host>
+      <port>9090</port>
+      <layout type="log4net.Layout.PatternLayout">
+        <ConversionPattern value="%m" />
+      </layout>
+    </appender>
+    
+    <root>
+      <level value="INFO"/>
+      <appender-ref ref="FlumeAppender" />
+    </root>
+  
+  </log4net>
+
+</configuration>
+```
+
+Modify your Flume .conf file as documented above for NLog.
+
+Write log4net code as usual:
+
+```
+using log4net;
+using log4net.Config;
+ 
+public class MyClass
+{
+	private static readonly ILog logger = LogManager.GetLogger(typeof (MyClass));
+ 
+	public void MyMethod1()
+	{
+        XmlConfigurator.Configure();
+
+        logger.Debug("Sample debug message");
+        logger.Info("Sample informational message");
+	}
+}
+```

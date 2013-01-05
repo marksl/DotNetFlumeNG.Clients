@@ -13,21 +13,18 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("DotNetFlumeNG.Client.log4net")]
-[assembly: AssemblyDescription(".Net Flume Client Library")]
+[assembly: AssemblyTitle("DotNetFlumeNG.Client.log4net.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mark Lamley")]
-[assembly: AssemblyProduct("DotNetFlumeNG.Client.log4net")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("DotNetFlumeNG.Client.log4net.Tests")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("cc109eb8-8676-4d40-95c1-a96c05675524")]
-[assembly: AssemblyVersion("0.2.0.0")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
-[assembly: CLSCompliant(true)]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("DotNetFlumeNG.Client.log4net.Tests")]
+[assembly: Guid("f7d27e85-aad5-4a59-9bab-94a8dd0f901f")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
