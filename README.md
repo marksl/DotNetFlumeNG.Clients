@@ -83,7 +83,7 @@ public class MyClass
 }
 ```
 
-## log4net 0.2.0.0 Installation
+## log4net 0.2.1.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 

@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLogNestedConfigApp", "NLog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFlumeNG.Client.log4net.Tests", "DotNetFlumeNG.Client.log4net.Tests\DotNetFlumeNG.Client.log4net.Tests.csproj", "{7C38FC05-06B3-433F-AB1A-93C91508800A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4netTestApp", "log4netTestApp\log4netTestApp.csproj", "{76978554-F537-4C4B-9BE8-109C2C80D663}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{7C38FC05-06B3-433F-AB1A-93C91508800A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C38FC05-06B3-433F-AB1A-93C91508800A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C38FC05-06B3-433F-AB1A-93C91508800A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76978554-F537-4C4B-9BE8-109C2C80D663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76978554-F537-4C4B-9BE8-109C2C80D663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76978554-F537-4C4B-9BE8-109C2C80D663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76978554-F537-4C4B-9BE8-109C2C80D663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
