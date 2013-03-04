@@ -28,6 +28,7 @@ namespace DotNetFlumeNG.Client.log4net
         private readonly string _message;
 
         public Log4NetEventAdapter(string message, LoggingEvent logEventInfo)
+            : base(logEventInfo.TimeStamp)
         {
             if (message == null) throw new ArgumentNullException("message");
             if (logEventInfo == null) throw new ArgumentNullException("logEventInfo");

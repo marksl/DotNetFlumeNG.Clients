@@ -17,19 +17,19 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 
 namespace DotNetFlumeNG.Client.Core
 {
     public abstract class LogEvent
     {
+        protected LogEvent(DateTime timestamp)
+        {
+            TimestampInMilliseconds = (long)(timestamp - Jan1st1970).TotalMilliseconds;
+        }
         private static readonly DateTime Jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         public long TimestampInMilliseconds { get; private set; }
-
-        public DateTime Timestamp
-        {
-            set { TimestampInMilliseconds = (long) (value - Jan1st1970).TotalMilliseconds; }
-        }
 
         public long Nanos
         {
@@ -47,8 +47,7 @@ namespace DotNetFlumeNG.Client.Core
         {
             get
             {
-                IPHostEntry he = Dns.GetHostEntry(Environment.UserDomainName);
-                return he.HostName;
+                return Dns.GetHostName();
             }
         }
 
