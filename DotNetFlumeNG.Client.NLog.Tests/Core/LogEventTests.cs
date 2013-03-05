@@ -43,15 +43,5 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Core
             Assert.IsNotNull(_event.Nanos);
         }
 
-        [Test]
-        public void TimestampInMilliseconds_ModifyTimestamp_TimestampInMillisecondsUpdated()
-        {
-            long before = _event.TimestampInMilliseconds;
-
-            _event.Timestamp = DateTime.Now.Subtract(new TimeSpan(45, 0, 0, 0));
-
-            Assert.AreNotEqual(before, _event.TimestampInMilliseconds);
-            Assert.AreNotEqual(0, _event.TimestampInMilliseconds);
-        }
     }
 }
