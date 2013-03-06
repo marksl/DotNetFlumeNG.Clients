@@ -26,7 +26,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Core
         [SetUp]
         public void Init()
         {
-            _event = new Mock<LogEvent>().Object;
+            _event = new Mock<LogEvent>(DateTime.UtcNow).Object;
         }
 
         private LogEvent _event;

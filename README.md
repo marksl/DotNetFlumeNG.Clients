@@ -4,7 +4,7 @@ Apache Flume is a distributed, reliable, and available service for efficiently c
 
 DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to flume from C# easy. It uses the Flume legacy thrift support because currently C# Avro RPC support is lacking.
 
-## NLog 0.2.0.0 Installation
+## NLog 0.2.3.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
@@ -83,7 +83,7 @@ public class MyClass
 }
 ```
 
-## log4net 0.2.1.0 Installation
+## log4net 0.2.3.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 

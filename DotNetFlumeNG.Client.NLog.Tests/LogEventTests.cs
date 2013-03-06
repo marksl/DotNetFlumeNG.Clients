@@ -13,6 +13,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
+using System;
 using DotNetFlumeNG.Client.Core;
 using Moq;
 using NUnit.Framework;
@@ -25,7 +26,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         [SetUp]
         public void Init()
         {
-            logEvent = new Mock<LogEvent>().Object;
+            logEvent = new Mock<LogEvent>(DateTime.UtcNow).Object;
         }
 
         private LogEvent logEvent;

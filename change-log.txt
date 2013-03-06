@@ -2,6 +2,15 @@ ______________________________________________
 .Net Flume Client log Change Log
 ______________________________________________
 
+0.2.3 - March 6th, 2013
+* Timestamp set to UTC
+* Use Default Encoding
+
+0.2.2 - March 4th, 2013
+
+* Timestamp was not being set
+* HostName query crashed on some machines.
+
 0.2.1 - January 5th, 2013
 
 * Published log4net appender to NuGet.

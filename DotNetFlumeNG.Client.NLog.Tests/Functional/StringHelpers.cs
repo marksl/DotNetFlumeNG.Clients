@@ -13,7 +13,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System;
+using System.Text;
 
 namespace DotNetFlumeNG.Client.NLog.Tests
 {
@@ -21,9 +21,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests
     {
         public static string GetString(byte[] bytes)
         {
-            var chars = new char[bytes.Length/sizeof (char)];
-            Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-            return new string(chars);
+            return Encoding.Default.GetString(bytes);
         }
     }
 }

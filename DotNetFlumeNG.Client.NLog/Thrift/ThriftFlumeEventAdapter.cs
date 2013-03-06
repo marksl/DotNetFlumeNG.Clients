@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using DotNetFlumeNG.Client.Core;
 
 namespace DotNetFlumeNG.Client.Thrift
@@ -72,7 +73,7 @@ namespace DotNetFlumeNG.Client.Thrift
         {
             var bytes = new byte[str.Length*sizeof (char)];
             Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
+            return Encoding.Default.GetBytes(str);
         }
     }
 }

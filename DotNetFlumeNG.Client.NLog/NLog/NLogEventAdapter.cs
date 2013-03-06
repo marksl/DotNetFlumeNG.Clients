@@ -28,7 +28,7 @@ namespace DotNetFlumeNG.Client.NLog
         private readonly string _message;
 
         public NLogEventAdapter(string message, LogEventInfo logEventInfo)
-            : base(logEventInfo.TimeStamp)
+            : base(logEventInfo != null ? logEventInfo.TimeStamp.ToUniversalTime() : DateTime.UtcNow)
         {
             if (message == null) throw new ArgumentNullException("message");
             if (logEventInfo == null) throw new ArgumentNullException("logEventInfo");
