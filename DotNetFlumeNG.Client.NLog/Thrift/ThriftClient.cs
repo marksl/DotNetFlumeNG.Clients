@@ -48,7 +48,6 @@ namespace DotNetFlumeNG.Client.Thrift
         {
             var thriftFlumeEvent = new ThriftFlumeEventAdapter(logEvent);
             _client.append(thriftFlumeEvent);
-            _client.close();
         }
 
         ~ThriftClient()

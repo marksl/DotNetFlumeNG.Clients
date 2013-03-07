@@ -51,6 +51,7 @@ namespace DotNetFlumeNG.Client.Core
             }
         }
 
+        public abstract string LoggerName { get; }
         public abstract LogPriority Priority { get; }
         public abstract string Body { get; }
         public abstract IDictionary<object, object> Fields { get; }

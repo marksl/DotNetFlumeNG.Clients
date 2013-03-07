@@ -15,6 +15,7 @@
 
 using System;
 using System.Globalization;
+using DotNetFlumeNG.Client.Avro;
 using DotNetFlumeNG.Client.Core;
 using DotNetFlumeNG.Client.Thrift;
 
@@ -24,20 +25,27 @@ namespace DotNetFlumeNG.Client
     {
         public static IFlumeClient CreateClient()
         {
-            if (_clientType == ClientType.Thrift)
+            if (_client == null || _client.IsClosed)
             {
-                if (_client == null || _client.IsClosed)
+                switch (_clientType)
                 {
-                    _client = new ThriftClient(_host, _port);
-                }
+                    case ClientType.Thrift:
+                        _client = new ThriftClient(_host, _port);
+                        break;
 
-                return _client;
+                    case ClientType.Avro:
+                        _client = new AvroClient(_host, _port);
+                        break;
+
+                    default:
+                        throw new NotSupportedException(
+                            string.Format(CultureInfo.InvariantCulture,
+                                          "The client type [{0}] is not supported. The only supported type is Thrift.",
+                                          _clientType));
+                }
             }
 
-            throw new NotSupportedException(
-                string.Format(CultureInfo.InvariantCulture,
-                              "The client type [{0}] is not supported. The only supported type is Thrift.",
-                              _clientType));
+            return _client;
         }
     }
 }

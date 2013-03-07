@@ -76,5 +76,10 @@ namespace DotNetFlumeNG.Client.NLog
         {
             get { return _logEventInfo.Properties; }
         }
+
+        public override string LoggerName
+        {
+            get { return _logEventInfo.LoggerName; }
+        }
     }
 }

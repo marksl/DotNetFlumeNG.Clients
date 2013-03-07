@@ -92,5 +92,10 @@ namespace DotNetFlumeNG.Client.log4net
         {
             get { return _fields; }
         }
+
+        public override string LoggerName
+        {
+            get { return _logEventInfo.LoggerName; }
+        }
     }
 }
