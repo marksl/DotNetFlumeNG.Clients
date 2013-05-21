@@ -45,7 +45,7 @@ namespace DotNetFlumeNG.Client.Avro
         {
             AvroFlumeEvent avroFlumeEvent = new AvroFlumeEventAdapter(logEvent);
 
-            _client.append(avroFlumeEvent);
+            Status result = _client.append(avroFlumeEvent);
         }
 
         public void Dispose()
