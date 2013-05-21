@@ -26,8 +26,9 @@ namespace DotNetFlumeNG.Client.NLog
     {
         private readonly LogEventInfo _logEventInfo;
         private readonly string _message;
+        private readonly string _environment;
 
-        public NLogEventAdapter(string message, LogEventInfo logEventInfo)
+        public NLogEventAdapter(string message, LogEventInfo logEventInfo, string environment = null)
             : base(logEventInfo != null ? logEventInfo.TimeStamp.ToUniversalTime() : DateTime.UtcNow)
         {
             if (message == null) throw new ArgumentNullException("message");
@@ -35,6 +36,7 @@ namespace DotNetFlumeNG.Client.NLog
 
             _message = message;
             _logEventInfo = logEventInfo;
+            _environment = environment;
         }
 
         public override LogPriority Priority
@@ -75,6 +77,11 @@ namespace DotNetFlumeNG.Client.NLog
         public override IDictionary<object, object> Fields
         {
             get { return _logEventInfo.Properties; }
+        }
+
+        public override string Environment
+        {
+            get { return _environment; }
         }
 
         public override string LoggerName

@@ -50,6 +50,7 @@ namespace NLog.PerformanceTests
             return memoryStream;
         }
 
+        [Ignore]
         [Test]
         public void NoPools_FourThreads()
         {
@@ -59,6 +60,7 @@ namespace NLog.PerformanceTests
             AssertIsEmpty(errorStream);
         }
 
+        [Ignore]
         [Test]
         public void PoolSizeFour_FourThreads()
         {
@@ -66,7 +68,6 @@ namespace NLog.PerformanceTests
 
             AssertIsEmpty(errorStream);
         }
-
 
         private static void WaidForThreads(List<Thread> threads)
         {

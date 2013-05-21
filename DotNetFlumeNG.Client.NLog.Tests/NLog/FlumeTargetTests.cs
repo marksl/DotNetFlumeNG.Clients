@@ -24,18 +24,14 @@ namespace DotNetFlumeNG.Client.NLog.Tests.NLog
         [Test]
         public void ConstructorAndProperties_WorkProperly()
         {
-            const ClientType clientType = ClientType.Thrift;
-
             const string host = "host";
             const int port = 3;
             var f = new FlumeTarget
                         {
-                            Client = clientType,
                             Host = host,
                             Port = port
                         };
 
-            Assert.AreEqual(clientType, f.Client);
             Assert.AreEqual(host, f.Host);
             Assert.AreEqual(port, f.Port);
         }

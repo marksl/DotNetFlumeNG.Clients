@@ -13,7 +13,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using DotNetFlumeNG.Client.Core;
+using DotNetFlumeNG.Client.Avro;
 using log4net.Appender;
 using log4net.Core;
 
@@ -21,18 +21,15 @@ namespace DotNetFlumeNG.Client.log4net
 {
     public class FlumeAppender : AppenderSkeleton
     {
-        public FlumeAppender()
-        {
-            Client = ClientType.Thrift;
-        }
-
-        public ClientType Client { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
+        public string Environment { get; set; }
+
+        private AvroClient client;
 
         public override void ActivateOptions()
         {
-            FlumeClientFactory.Init(Client, Host, Port);
+            client = new AvroClient(Host, Port);
 
             base.ActivateOptions();
         }
@@ -45,15 +42,18 @@ namespace DotNetFlumeNG.Client.log4net
             }
 
             string formattedText = RenderLoggingEvent(logEvent);
-            var nLogEventAdapter = new Log4NetEventAdapter(formattedText, logEvent);
+            var nLogEventAdapter = new Log4NetEventAdapter(formattedText, logEvent, Environment);
 
-            var client = FlumeClientFactory.CreateClient();
             client.Append(nLogEventAdapter);
         }
 
         protected override void OnClose()
         {
-            FlumeClientFactory.Close();
+            if (client != null)
+            {
+                client.Dispose();
+                client = null;
+            }
 
             base.OnClose();
         }

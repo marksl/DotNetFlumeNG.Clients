@@ -15,8 +15,9 @@ namespace org.apache.flume.source.avro
 	
 	public partial class AvroFlumeEvent : ISpecificRecord
 	{
-		private static Schema _SCHEMA = Avro.Schema.Parse("{\"type\":\"record\",\"name\":\"AvroFlumeEvent\",\"fields\":[{\"name\":\"headers\",\"type\":{\"typ" +
-				"e\":\"map\",\"values\":\"string\"}},{\"name\":\"body\",\"type\":\"bytes\"}]}");
+		private static Schema _SCHEMA = Avro.Schema.Parse("{\"type\":\"record\",\"name\":\"AvroFlumeEvent\",\"namespace\":\"org.apache.flume.source.avr" +
+				"o\",\"fields\":[{\"name\":\"headers\",\"type\":{\"type\":\"map\",\"values\":\"string\"}},{\"name\":" +
+				"\"body\",\"type\":\"bytes\"}]}");
 		private IDictionary<string,System.String> _headers;
 		private byte[] _body;
 		public virtual Schema Schema

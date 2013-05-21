@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Sockets;
 
 namespace DotNetFlumeNG.Client.Core
 {
@@ -55,5 +54,6 @@ namespace DotNetFlumeNG.Client.Core
         public abstract LogPriority Priority { get; }
         public abstract string Body { get; }
         public abstract IDictionary<object, object> Fields { get; }
+        public abstract string Environment { get; }
     }
 }

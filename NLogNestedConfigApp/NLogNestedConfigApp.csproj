@@ -34,26 +34,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avro">
+      <HintPath>..\packages-legacy\Avro.dll</HintPath>
+    </Reference>
+    <Reference Include="Avro.ipc">
+      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Thrift">
-      <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\Functional\StringHelpers.cs">
       <Link>StringHelpers.cs</Link>
     </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\MockThriftServer.cs">
-      <Link>MockThriftServer.cs</Link>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\MockAvroServer.cs">
+      <Link>MockAvroServer.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,39 +14,38 @@
 //     limitations under the License.
 
 using System;
-using System.IO;
-using System.Reflection;
-using Avro;
 using Avro.ipc;
 using Avro.ipc.Specific;
 using DotNetFlumeNG.Client.Core;
+using org.apache.flume.source.avro;
 
 namespace DotNetFlumeNG.Client.Avro
 {
     public class AvroClient : IFlumeClient
     {
-        private readonly Protocol _protocol;
-        private readonly SocketTransceiver _socketTransceiver;
-        private readonly SpecificRequestor _specificRequestor;
+        private SocketTransceiver _socketTransceiver;
+        private readonly AvroSourceProtocol _client;
         private bool _disposed;
 
         public AvroClient(string host, int port)
         {
-            _socketTransceiver = new SocketTransceiver();
-            _socketTransceiver.Connect(host, port);
+            if (host == null) throw new ArgumentNullException("host");
+            if (port < 0) throw new ArgumentOutOfRangeException("port", "Port must be greater than or equal to zero.");
 
-            string json = GetJsonFromEmbeddedResource();
-            _protocol = Protocol.Parse(json);
-
-            _specificRequestor = new SpecificRequestor(_socketTransceiver, _protocol);
+            _socketTransceiver = new SocketTransceiver(host, port);
+            _client = SpecificRequestor.CreateClient<AvroSourceProtocol>(_socketTransceiver);
         }
-       
-        public bool IsClosed { get; private set; }
+
+        public bool IsClosed
+        {
+            get { return _socketTransceiver.IsConnected; }
+        }
 
         public void Append(LogEvent logEvent)
         {
-            var adapter = new AvroFlumeEventAdapter(logEvent);
-            _specificRequestor.Request("append", new object[] {adapter});
+            AvroFlumeEvent avroFlumeEvent = new AvroFlumeEventAdapter(logEvent);
+
+            _client.append(avroFlumeEvent);
         }
 
         public void Dispose()
@@ -67,20 +66,11 @@ namespace DotNetFlumeNG.Client.Avro
                 if (disposing)
                 {
                     _socketTransceiver.Disconnect();
+                    _socketTransceiver = null;
                 }
             }
 
             _disposed = true;
-        }
-
-        private static string GetJsonFromEmbeddedResource()
-        {
-            using (Stream stream = Assembly.GetExecutingAssembly()
-                                           .GetManifestResourceStream("DotNetFlumeNG.Client.Avro.flume.avpr"))
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
         }
     }
 }

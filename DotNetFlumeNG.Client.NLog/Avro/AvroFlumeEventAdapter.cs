@@ -27,26 +27,28 @@ namespace DotNetFlumeNG.Client.Avro
     {
         public AvroFlumeEventAdapter(LogEvent logEvent)
         {
-            headers = new Dictionary<string, string>();
-            headers["flume.client.log4j.logger.name"] = logEvent.LoggerName;
-            headers["flume.client.log4j.log.level"] = GetLevel(logEvent.Priority).ToString();
-            headers["flume.client.log4j.timestamp"] = logEvent.TimestampInMilliseconds.ToString();
-            headers["flume.client.log4j.message.encoding"] = "UTF8";
+            IDictionary<string, string> dic = new Dictionary<string, string>();
 
-            // Not used...
-            // OTHER("flume.client.log4j.logger.other"),
+            foreach (KeyValuePair<object, object> key in logEvent.Fields)
+            {
+                dic.Add(key.Key.ToString(), key.Value.ToString());
+            }
 
-            // These don't seem to have mappings to Avro.
-            //Host = logEvent.Host
-            //Nanos = logEvent.Nanos;
-            
-            SetFields(logEvent);
+            dic["flume.client.log4j.logger.name"] = logEvent.LoggerName;
+            dic["flume.client.log4j.log.level"] = GetLevel(logEvent.Priority).ToString();
+            dic["flume.client.log4j.timestamp"] = logEvent.TimestampInMilliseconds.ToString();
+            dic["flume.client.log4j.message.encoding"] = "UTF8";
 
+            dic["environment"] = logEvent.Environment ?? "DEBUG";
+            dic["host"] = logEvent.Host;
+            dic["timestamp"] = logEvent.TimestampInMilliseconds.ToString();
+            dic["message"] = logEvent.Body;
+
+            headers = dic;
             body = GetBytes(logEvent.Body);
         }
 
-        // TODO: fix Duplicate code
-        private static byte[] GetBytes(string str)
+        public static byte[] GetBytes(string str)
         {
             var bytes = new byte[str.Length * sizeof(char)];
             Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
@@ -57,7 +59,7 @@ namespace DotNetFlumeNG.Client.Avro
         // http://www.docjar.com/html/api/org/apache/log4j/Priority.java.html
         // http://www.docjar.com/html/api/org/apache/log4j/Level.java.html
         //
-        private int GetLevel(LogPriority priority)
+        private static int GetLevel(LogPriority priority)
         {
             switch (priority)
             {
@@ -82,19 +84,5 @@ namespace DotNetFlumeNG.Client.Avro
 
             throw new NotSupportedException(string.Format("That priority level [{0}] is not supported", priority));
         }
-
-        private void SetFields(LogEvent logEvent)
-        {
-            if (logEvent.Fields != null && logEvent.Fields.Count > 0)
-            {
-                foreach (var i in logEvent.Fields.Keys)
-                {
-                    var str = logEvent.Fields[i].ToString();
-
-                    headers[i.ToString()] = str;
-                }
-            }
-        }
-
     }
 }

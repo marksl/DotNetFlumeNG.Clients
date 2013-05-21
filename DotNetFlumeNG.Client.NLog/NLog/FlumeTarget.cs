@@ -13,8 +13,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-using System.ComponentModel;
-using DotNetFlumeNG.Client.Core;
+using DotNetFlumeNG.Client.Avro;
 using NLog;
 using NLog.Targets;
 
@@ -23,19 +22,18 @@ namespace DotNetFlumeNG.Client.NLog
     [Target("Flume")]
     public sealed class FlumeTarget : TargetWithLayout
     {
-        [DefaultValue(ClientType.Thrift)]
-        public ClientType Client { get; set; }
-
         public string Host { get; set; }
         public int Port { get; set; }
+        public string Environment { get; set; }
 
         protected override void InitializeTarget()
         {
-            FlumeClientFactory.Init(Client, Host, Port);
+            client = new AvroClient(Host, Port);
 
             base.InitializeTarget();
         }
 
+        private AvroClient client;
         protected override void Write(LogEventInfo logEvent)
         {
             if (logEvent.Level == LogLevel.Off)
@@ -44,15 +42,18 @@ namespace DotNetFlumeNG.Client.NLog
             }
 
             string formattedText = Layout.Render(logEvent);
-            var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent);
+            var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent, Environment);
 
-            var client = FlumeClientFactory.CreateClient();
             client.Append(nLogEventAdapter);
         }
 
         protected override void CloseTarget()
         {
-            FlumeClientFactory.Close();
+            if (client != null)
+            {
+                client.Dispose();
+                client = null;
+            }
 
             base.CloseTarget();
         }

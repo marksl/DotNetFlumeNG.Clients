@@ -14,9 +14,11 @@
 //     limitations under the License.
 
 using System.Threading;
+using DotNetFlumeNG.Client.NLog.Tests;
 using NUnit.Framework;
 using log4net;
 using log4net.Config;
+using org.apache.flume.source.avro;
 
 namespace DotNetFlumeNG.Client.log4net.Tests.Functional
 {
@@ -35,18 +37,18 @@ namespace DotNetFlumeNG.Client.log4net.Tests.Functional
         [Test]
         public void TestEndtoEnd()
         {
-            XmlConfigurator.Configure();
+            var server = new MockAvroServer();
 
-            var server = new MockThriftServer();
+            XmlConfigurator.Configure();
 
             logger.Info("Test Message");
             Thread.Sleep(100);
             server.Close();
 
             Assert.AreEqual(1, server.ReceivedEvents.Count, "The server should receive 1 event.");
-            ThriftFlumeEvent receivedEvent = server.ReceivedEvents[0];
-            string actualMessage = StringHelpers.GetString(receivedEvent.Body);
-            Assert.AreEqual(Priority.INFO, receivedEvent.Priority);
+            AvroFlumeEvent receivedEvent = server.ReceivedEvents[0];
+            string actualMessage = StringHelpers.GetString(receivedEvent.body);
+            Assert.AreEqual("20000", receivedEvent.headers["flume.client.log4j.log.level"]);
             Assert.IsTrue(actualMessage.Contains("Test Message"));
         }
     }

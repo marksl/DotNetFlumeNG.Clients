@@ -32,8 +32,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avro">
+      <HintPath>..\packages-legacy\Avro.dll</HintPath>
+    </Reference>
+    <Reference Include="Avro.ipc">
+      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages-legacy\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages-legacy\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages-legacy\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -44,21 +59,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Thrift">
-      <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\LogEventTests.cs" />
-    <Compile Include="FlumeClientFactoryTests.cs" />
     <Compile Include="Functional\EndToEndTest.cs" />
     <Compile Include="LogEventTests.cs" />
-    <Compile Include="MockThriftServer.cs" />
+    <Compile Include="MockAvroServer.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Functional\StringHelpers.cs" />
     <Compile Include="NLog\FlumeTargetTests.cs" />
     <Compile Include="NLog\NLogEventAdapterTests.cs" />
-    <Compile Include="Thrift\ThriftClientTests.cs" />
+    <Compile Include="Avro\AvroClientTests.cs" />
     <Compile Include="TimeStampTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

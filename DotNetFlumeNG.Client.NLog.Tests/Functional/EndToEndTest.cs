@@ -16,13 +16,13 @@
 using System.Threading;
 using NLog;
 using NUnit.Framework;
+using org.apache.flume.source.avro;
 
 namespace DotNetFlumeNG.Client.NLog.Tests
 {
     [TestFixture]
     public class EndToEndTest
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         ///     This tests the following:
@@ -34,16 +34,18 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         [Test]
         public void TestEndtoEnd()
         {
-            var server = new MockThriftServer();
+            var server = new MockAvroServer();
+
+            Logger logger = LogManager.GetCurrentClassLogger();
 
             logger.Info("Test Message");
             Thread.Sleep(100);
             server.Close();
 
             Assert.AreEqual(1, server.ReceivedEvents.Count, "The server should receive 1 event.");
-            ThriftFlumeEvent receivedEvent = server.ReceivedEvents[0];
-            string actualMessage = StringHelpers.GetString(receivedEvent.Body);
-            Assert.AreEqual(Priority.INFO, receivedEvent.Priority);
+            AvroFlumeEvent receivedEvent = server.ReceivedEvents[0];
+            string actualMessage = StringHelpers.GetString(receivedEvent.body);
+            Assert.AreEqual("20000", receivedEvent.headers["flume.client.log4j.log.level"]);
             Assert.IsTrue(actualMessage.Contains("Test Message"));
         }
     }

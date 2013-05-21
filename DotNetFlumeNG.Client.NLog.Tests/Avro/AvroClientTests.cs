@@ -14,7 +14,7 @@
 //     limitations under the License.
 
 using System;
-using DotNetFlumeNG.Client.Thrift;
+using DotNetFlumeNG.Client.Avro;
 using NLog;
 using NUnit.Framework;
 
@@ -26,7 +26,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
         [SetUp]
         public void Setup()
         {
-            _mockServer = new MockThriftServer();
+            _mockServer = new MockAvroServer();
         }
 
         [TearDown]
@@ -35,16 +35,17 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
             _mockServer.Close();
         }
 
-        private MockThriftServer _mockServer;
+        private MockAvroServer _mockServer;
 
         [Test]
         public void Append_WithMockServer_Succeeds()
         {
             var logEventInfo = new LogEventInfo(LogLevel.Debug, "logger", "message");
-            var nLogEventAdapter = new NLogEventAdapter("message", logEventInfo);
-            using (var thriftClient = new ThriftClient("localhost", 9090))
+            var nLogEventAdapter = new NLogEventAdapter("message", logEventInfo, "DEBUG");
+
+            using (var avroClient = new AvroClient("localhost", _mockServer.Port))
             {
-                thriftClient.Append(nLogEventAdapter);
+                avroClient.Append(nLogEventAdapter);
             }
         }
 
@@ -52,7 +53,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
         public void Constructor_NoHost_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new ThriftClient(null, 50));
+                () => new AvroClient(null, 50));
         }
     }
 }

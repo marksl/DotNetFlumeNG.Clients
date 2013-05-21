@@ -32,16 +32,43 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avro">
+      <HintPath>..\packages-legacy\Avro.dll</HintPath>
+    </Reference>
+    <Reference Include="Avro.ipc">
+      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages-legacy\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\packages-legacy\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages-legacy\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Thrift">
-      <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\AvroClient.cs">
+      <Link>Avro\AvroClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\AvroFlumeEventAdapter.cs">
+      <Link>Avro\AvroFlumeEventAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\org\apache\flume\source\avro\AvroFlumeEvent.cs">
+      <Link>Avro\org\apache\flume\source\avro\AvroFlumeEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\org\apache\flume\source\avro\AvroSourceProtocol.cs">
+      <Link>Avro\org\apache\flume\source\avro\AvroSourceProtocol.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\org\apache\flume\source\avro\AvroSourceProtocolCallback.cs">
+      <Link>Avro\org\apache\flume\source\avro\AvroSourceProtocolCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Avro\org\apache\flume\source\avro\Status.cs">
+      <Link>Avro\org\apache\flume\source\avro\Status.cs</Link>
+    </Compile>
     <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\AccessMode.cs">
       <Link>Core\AccessMode.cs</Link>
     </Compile>
@@ -59,30 +86,6 @@
     </Compile>
     <Compile Include="..\DotNetFlumeNG.Client.NLog\Core\LogPriority.cs">
       <Link>Core\LogPriority.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\FlumeClientFactory.cs">
-      <Link>FlumeClientFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\FlumeClientFactoryThrift.cs">
-      <Link>FlumeClientFactoryThrift.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\EventStatus.cs">
-      <Link>Thrift\EventStatus.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\Priority.cs">
-      <Link>Thrift\Priority.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftClient.cs">
-      <Link>Thrift\ThriftClient.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEvent.cs">
-      <Link>Thrift\ThriftFlumeEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventAdapter.cs">
-      <Link>Thrift\ThriftFlumeEventAdapter.cs</Link>
-    </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventServer.cs">
-      <Link>Thrift\ThriftFlumeEventServer.cs</Link>
     </Compile>
     <Compile Include="log4net\FlumeAppender.cs" />
     <Compile Include="log4net\Log4NetEventAdapter.cs" />

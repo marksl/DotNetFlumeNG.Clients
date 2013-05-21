@@ -26,8 +26,9 @@ namespace DotNetFlumeNG.Client.log4net
         private readonly Dictionary<object, object> _fields;
         private readonly LoggingEvent _logEventInfo;
         private readonly string _message;
+        private readonly string _environment;
 
-        public Log4NetEventAdapter(string message, LoggingEvent logEventInfo)
+        public Log4NetEventAdapter(string message, LoggingEvent logEventInfo, string environment)
             : base(logEventInfo != null ? logEventInfo.TimeStamp : DateTime.UtcNow)
         {
             if (message == null) throw new ArgumentNullException("message");
@@ -41,14 +42,14 @@ namespace DotNetFlumeNG.Client.log4net
             {
                 _fields[key] = logEventInfo.Properties[key];
             }
+            _environment = environment;
         }
 
         public override LogPriority Priority
         {
             get
             {
-                if (_logEventInfo.Level == Level.Log4Net_Debug
-                    || _logEventInfo.Level == Level.Debug)
+                if ( _logEventInfo.Level == Level.Debug)
                     return LogPriority.Debug;
 
                 if (_logEventInfo.Level == Level.Emergency
@@ -91,6 +92,11 @@ namespace DotNetFlumeNG.Client.log4net
         public override IDictionary<object, object> Fields
         {
             get { return _fields; }
+        }
+
+        public override string Environment
+        {
+            get { return _environment; }
         }
 
         public override string LoggerName

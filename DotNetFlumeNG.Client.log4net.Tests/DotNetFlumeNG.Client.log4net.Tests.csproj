@@ -32,8 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Avro">
+      <HintPath>..\packages-legacy\Avro.dll</HintPath>
+    </Reference>
+    <Reference Include="Avro.ipc">
+      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages-legacy\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\packages-legacy\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages-legacy\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -45,14 +57,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Thrift">
-      <HintPath>..\packages\Thrift.0.9.0.0\lib\net35\Thrift.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog.Tests\MockAvroServer.cs">
+      <Link>MockAvroServer.cs</Link>
+    </Compile>
     <Compile Include="Functional\EndToEndTest.cs" />
     <Compile Include="Functional\StringHelpers.cs" />
-    <Compile Include="MockThriftServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
