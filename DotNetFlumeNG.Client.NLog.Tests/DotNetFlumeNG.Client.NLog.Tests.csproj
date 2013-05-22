@@ -33,22 +33,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Avro">
-      <HintPath>..\packages-legacy\Avro.dll</HintPath>
+      <HintPath>..\packages\Avro.0.9.1.0\lib\net40\Avro.dll</HintPath>
     </Reference>
     <Reference Include="Avro.ipc">
-      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
+      <HintPath>..\packages\Avro.ipc.0.9.1.0\lib\net40\Avro.ipc.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
-      <HintPath>..\packages-legacy\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages-legacy\log4net.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages-legacy\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

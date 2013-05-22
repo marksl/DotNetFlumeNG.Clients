@@ -50,10 +50,12 @@ namespace DotNetFlumeNG.Client.NLog.Tests
         public MockAvroServer()
         {
             _handler = new AvroSourceProtocolImpl();
-            var responder = new SpecificResponder<AvroSourceProtocol>(_handler);
-            _server = new SocketServer(responder, "localhost", 9090);
-
+            
+            _server = new SocketServer("localhost", 9090);
             _server.Start();
+
+            var responder = new SpecificResponder<AvroSourceProtocol>(_handler);
+            _server.SetResponder(responder);
         }
 
         public int Port
