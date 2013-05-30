@@ -13,7 +13,9 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
+using System.Collections.Generic;
 using DotNetFlumeNG.Client.Avro;
+using DotNetFlumeNG.Client.Core;
 using NLog;
 using NLog.Targets;
 
@@ -45,6 +47,26 @@ namespace DotNetFlumeNG.Client.NLog
             var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent, Environment);
 
             client.Append(nLogEventAdapter);
+        }
+
+
+        protected override void Write(global::NLog.Common.AsyncLogEventInfo[] logEvents)
+        {
+            var events = new List<LogEvent>();
+
+            foreach (var e in logEvents)
+            {
+                LogEventInfo logEvent = e.LogEvent;
+                if (logEvent.Level == LogLevel.Off)
+                    continue;
+
+                string formattedText = Layout.Render(logEvent);
+                var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent, Environment);
+
+                events.Add(nLogEventAdapter);
+            }
+
+            client.AppendBatch(events.ToArray());
         }
 
         protected override void CloseTarget()

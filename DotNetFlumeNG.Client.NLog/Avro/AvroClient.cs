@@ -14,10 +14,16 @@
 //     limitations under the License.
 
 using System;
+using System.Linq;
 using Avro.ipc;
 using Avro.ipc.Specific;
 using DotNetFlumeNG.Client.Core;
 using org.apache.flume.source.avro;
+
+#if _NLOG_
+using NLog.Common;
+#endif
+
 
 namespace DotNetFlumeNG.Client.Avro
 {
@@ -43,9 +49,26 @@ namespace DotNetFlumeNG.Client.Avro
 
         public void Append(LogEvent logEvent)
         {
-            AvroFlumeEvent avroFlumeEvent = new AvroFlumeEventAdapter(logEvent);
+            var e = new AvroFlumeEventAdapter(logEvent);
 
-            Status result = _client.append(avroFlumeEvent);
+            Status result = _client.append(e);
+#if _NLOG_
+            InternalLogger.Debug("{0} - {1}", result, e.body);
+#endif
+        }
+
+
+        public void AppendBatch(LogEvent[] logEvents)
+        {
+            var events = logEvents.Select(l => new AvroFlumeEventAdapter(l)).ToArray();
+
+            Status result = _client.appendBatch(events);
+#if _NLOG_
+            foreach (var e in events)
+            {
+                InternalLogger.Debug("{0} - {1}", result, e.body);
+            }
+#endif
         }
 
         public void Dispose()
