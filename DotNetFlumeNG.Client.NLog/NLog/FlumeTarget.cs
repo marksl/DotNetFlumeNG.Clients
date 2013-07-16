@@ -14,9 +14,11 @@
 //     limitations under the License.
 
 using System.Collections.Generic;
+using System.Linq;
 using DotNetFlumeNG.Client.Avro;
 using DotNetFlumeNG.Client.Core;
 using NLog;
+using NLog.Common;
 using NLog.Targets;
 
 namespace DotNetFlumeNG.Client.NLog
@@ -28,14 +30,9 @@ namespace DotNetFlumeNG.Client.NLog
         public int Port { get; set; }
         public string Environment { get; set; }
 
-        protected override void InitializeTarget()
-        {
-            client = new AvroClient(Host, Port);
+        private AvroClient _client;
+        private readonly object _lockObj = new object();
 
-            base.InitializeTarget();
-        }
-
-        private AvroClient client;
         protected override void Write(LogEventInfo logEvent)
         {
             if (logEvent.Level == LogLevel.Off)
@@ -46,12 +43,29 @@ namespace DotNetFlumeNG.Client.NLog
             string formattedText = Layout.Render(logEvent);
             var nLogEventAdapter = new NLogEventAdapter(formattedText, logEvent, Environment);
 
-            client.Append(nLogEventAdapter);
+            GetClient().Append(nLogEventAdapter);
         }
 
+        AvroClient GetClient()
+        {
+            if (_client == null)
+            {
+                lock (_lockObj)
+                {
+                    InternalLogger.Debug(string.Format("Connecting to {0}:{1} via avro...", Host, Port));
+                    _client = new AvroClient(Host, Port);
+                    InternalLogger.Debug(string.Format("Connection succeeded"));
+                }
+            }
+
+            return _client;
+        }
 
         protected override void Write(global::NLog.Common.AsyncLogEventInfo[] logEvents)
         {
+            if (!logEvents.Any())
+                return;
+
             var events = new List<LogEvent>();
 
             foreach (var e in logEvents)
@@ -66,15 +80,20 @@ namespace DotNetFlumeNG.Client.NLog
                 events.Add(nLogEventAdapter);
             }
 
-            client.AppendBatch(events.ToArray());
+            InternalLogger.Debug(string.Format("Writing {0} events to remote host...", events.Count));
+            GetClient().AppendBatch(events.ToArray());
+            InternalLogger.Debug(string.Format("Completed writing events."));
         }
 
         protected override void CloseTarget()
         {
-            if (client != null)
+            lock (_lockObj)
             {
-                client.Dispose();
-                client = null;
+                if (_client != null)
+                {
+                    _client.Dispose();
+                    _client = null;
+                }
             }
 
             base.CloseTarget();

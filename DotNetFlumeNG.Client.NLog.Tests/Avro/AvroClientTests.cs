@@ -18,7 +18,7 @@ using DotNetFlumeNG.Client.Avro;
 using NLog;
 using NUnit.Framework;
 
-namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
+namespace DotNetFlumeNG.Client.NLog.Tests.Avro
 {
     [TestFixture]
     public class ThriftClientTests

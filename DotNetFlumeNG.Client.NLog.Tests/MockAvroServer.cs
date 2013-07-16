@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using Avro.ipc;
 using Avro.ipc.Specific;
+using Moq;
 using org.apache.flume.source.avro;
 
 namespace DotNetFlumeNG.Client.NLog.Tests
@@ -39,6 +40,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests
             public override Status appendBatch(IList<AvroFlumeEvent> events)
             {
                 throw new System.NotSupportedException();
+            
             }
 
             public List<AvroFlumeEvent> Events { get; private set; }
@@ -46,7 +48,6 @@ namespace DotNetFlumeNG.Client.NLog.Tests
 
         private readonly AvroSourceProtocolImpl _handler;
         private readonly SocketServer _server;
-
         public MockAvroServer()
         {
             _handler = new AvroSourceProtocolImpl();

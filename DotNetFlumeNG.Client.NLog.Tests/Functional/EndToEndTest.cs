@@ -39,7 +39,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests
             Logger logger = LogManager.GetCurrentClassLogger();
 
             logger.Info("Test Message");
-            Thread.Sleep(100);
+
             server.Close();
 
             Assert.AreEqual(1, server.ReceivedEvents.Count, "The server should receive 1 event.");

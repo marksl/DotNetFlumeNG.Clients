@@ -19,21 +19,12 @@ namespace NLog.PerformanceTests
             
             var flumeTarget = new FlumeTarget
                                   {
-                                      Client = ClientType.Thrift,
                                       Layout = "${date:format=HH\\:MM\\:ss} ${logger} ${message}",
-                                  };
-            if (poolSize == 0)
-            {
-                flumeTarget.UsePool = false;
-            }
-            else
-            {
-                flumeTarget.UsePool = true;
-                flumeTarget.PoolSize = 4;
-                flumeTarget.Retries = 0;
-            }
+                                      Host = "192.168.1.65",
+                                      Port = 9090
 
-            flumeTarget.FlumeSources.Add(new FlumeSource { Host = "192.168.1.65", Port = 9090 });
+                                  };
+            
             config.AddTarget("flume", flumeTarget);
 
             var flume = new LoggingRule("*", LogLevel.Debug, flumeTarget);
