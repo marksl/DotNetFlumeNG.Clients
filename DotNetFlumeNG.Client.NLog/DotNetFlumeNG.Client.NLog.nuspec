@@ -17,4 +17,8 @@
       <dependency id="NLog" version="2.0.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="..\packages-legacy\*.dll" target="lib\net40" />
+  </files>
+
 </package>
