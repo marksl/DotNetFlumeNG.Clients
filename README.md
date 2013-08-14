@@ -1,11 +1,11 @@
-# .Net FlumeNG Clients
+# .Net FlumeNG Clients Pre-Release!
 
 Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. DotNet
 
 This is a pre-release of DotNetFlumeNG Clients that uses Apache Avro as a transport instead of Apache Thrift. Currently only NLog is supported. This
 uses a forked copy of Apache Avro with the Avro-975-complete5.patch from here https://issues.apache.org/jira/browse/AVRO-975 applied.
 
-## NLog 0.3.1.0 Installation
+## NLog 0.3.2.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
