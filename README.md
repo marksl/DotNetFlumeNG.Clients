@@ -10,7 +10,7 @@ uses a forked copy of Apache Avro with the Avro-975-complete5.patch from here ht
 Type the following in the Visual Studio Package Manager Console.  
 
 ```
-Install-Package DotNetFlumeNG.Client.NLog
+Install-Package DotNetFlumeNG.Client.NLog -Pre
 ```
 
 Add the following configuration to your web.config or app.config:
