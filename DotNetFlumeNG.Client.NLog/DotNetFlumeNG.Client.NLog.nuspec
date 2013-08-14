@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>0.3.1-alpha</version>
     <title>DotNetFlumeNG NLog Client</title>
     <authors>$author$</authors>
     <owners>Mark Lamley</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/marksl/DotNetFlumeNG.Clients</projectUrl>
+    <projectUrl>https://github.com/marksl/DotNetFlumeNG.Clients/tree/Avro-Experimental</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package contains an NLog appender for writing to a Flume NG Thrift source.
     </description>

@@ -2,9 +2,10 @@
 
 Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. DotNet
 
-DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to flume from C# easy. It uses the Flume legacy thrift support because currently C# Avro RPC support is lacking.
+This is a pre-release of DotNetFlumeNG Clients that uses Apache Avro as a transport instead of Apache Thrift. Currently only NLog is supported. This
+uses a forked copy of Apache Avro with the Avro-975-complete5.patch from here https://issues.apache.org/jira/browse/AVRO-975 applied.
 
-## NLog 0.2.3.0 Installation
+## NLog 0.3.1.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
@@ -25,6 +26,12 @@ Add the following configuration to your web.config or app.config:
     <extensions>
       <add assembly="DotNetFlumeNG.Client.NLog" />
     </extensions>
+    
+	<default-wrapper xsi:type="AsyncWrapper"
+                   queueLimit="100"
+                   overflowAction="Discard">
+    </default-wrapper>
+
     <targets>
       <target name="a1" type="Flume" host="localhost" port="9090" />
     </targets>
@@ -45,17 +52,17 @@ Multiple flume sources are supported using NLog's Round Robin wrapper.
 </target>
 ```
 
-Modify your Flume .conf file. Add the ThriftLegacySource.  
+Modify your Flume .conf file. Add the Avro source.  
 
 ```
-agent.sources = legacysource-1
+agent.sources = avrosource
 agent.channels = memoryChannel-1
 agent.sinks = Console
 
-agent.sources.legacysource-1.type = org.apache.flume.source.thriftLegacy.ThriftLegacySource
-agent.sources.legacysource-1.host = localhost
-agent.sources.legacysource-1.port = 9090
-agent.sources.legacysource-1.channels = memoryChannel-1
+agent.sources.avrosource.type = avro
+agent.sources.avrosource.host = localhost
+agent.sources.avrosource.port = 9090
+agent.sources.avrosource.channels = memoryChannel-1
 
 agent.channels.memoryChannel-1.type = memory
 
@@ -79,66 +86,6 @@ public class MyClass
       logger.Trace("Sample trace message");
       logger.Debug("Sample debug message");
       logger.Info("Sample informational message");
-	}
-}
-```
-
-## log4net 0.2.3.0 Installation
-
-Type the following in the Visual Studio Package Manager Console.  
-
-```
-Install-Package DotNetFlumeNG.Client.log4net
-```
-
-Add the following configuration to your web.config or app.config:
-
-```
-<configuration>
-
-  <configSections>
-    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
-  </configSections>
-    
-  <log4net>
-    
-    <appender name="FlumeAppender" type="DotNetFlumeNG.Client.log4net.FlumeAppender, DotNetFlumeNG.Client.log4net">
-      <client>Thrift</client>
-      <host>localhost</host>
-      <port>9090</port>
-      <layout type="log4net.Layout.PatternLayout">
-        <ConversionPattern value="%m" />
-      </layout>
-    </appender>
-    
-    <root>
-      <level value="INFO"/>
-      <appender-ref ref="FlumeAppender" />
-    </root>
-  
-  </log4net>
-
-</configuration>
-```
-
-Modify your Flume .conf file as documented above for NLog.
-
-Write log4net code as usual:
-
-```
-using log4net;
-using log4net.Config;
- 
-public class MyClass
-{
-	private static readonly ILog logger = LogManager.GetLogger(typeof (MyClass));
- 
-	public void MyMethod1()
-	{
-        XmlConfigurator.Configure();
-
-        logger.Debug("Sample debug message");
-        logger.Info("Sample informational message");
 	}
 }
 ```
