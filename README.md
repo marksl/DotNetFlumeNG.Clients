@@ -52,7 +52,8 @@ agent.sources = legacysource-1
 agent.channels = memoryChannel-1
 agent.sinks = Console
 
-agent.sources.legacysource-1.type = org.apache.flume.source.thriftLegacy.ThriftLegacySource
+`# For Flume 1.3 and earlier use agent.sources.legacysource-1.type = org.apache.flume.source.thriftLegacy.ThriftLegacySource
+agent.sources.legacysource-1.type = thrift
 agent.sources.legacysource-1.host = localhost
 agent.sources.legacysource-1.port = 9090
 agent.sources.legacysource-1.channels = memoryChannel-1
