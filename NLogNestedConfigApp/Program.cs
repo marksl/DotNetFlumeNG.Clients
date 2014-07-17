@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using DotNetFlumeNG.Client.LegacyThrift;
 using DotNetFlumeNG.Client.NLog.Tests;
 using NLog;
 
@@ -17,12 +18,13 @@ namespace NLogNestedConfigApp
         {
             // Can't run these until there is a new version of the NLog client.
 
-            var server = new MockThriftServer();
+            MockThriftServer server = null;
 
             logger.Info("Test Message");
             logger.Info("Test Message");
             Thread.Sleep(100);
 
+            return;
             // Release the connection to the server
             LogManager.Configuration.AllTargets[0].Dispose();
 

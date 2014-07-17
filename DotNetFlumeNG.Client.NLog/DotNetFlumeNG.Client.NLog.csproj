@@ -33,15 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Avro">
-      <HintPath>..\packages-legacy\Avro.dll</HintPath>
-    </Reference>
-    <Reference Include="Avro.ipc">
-      <HintPath>..\packages-legacy\Avro.ipc.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages-legacy\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages-legacy\log4net.dll</HintPath>
     </Reference>
@@ -58,10 +49,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Avro\AvroClient.cs" />
-    <Compile Include="Avro\AvroFlumeEventAdapter.cs" />
-    <Compile Include="Avro\org\apache\flume\source\avro\AvroFlumeEvent.cs" />
-    <Compile Include="Avro\org\apache\flume\source\avro\Status.cs" />
     <Compile Include="Core\ClientType.cs" />
     <Compile Include="FlumeClientFactory.cs" />
     <Compile Include="FlumeClientFactoryThrift.cs" />
@@ -74,15 +61,19 @@
     <Compile Include="Core\AccessMode.cs" />
     <Compile Include="Core\LoadingMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Thrift\EventStatus.cs" />
-    <Compile Include="Thrift\Priority.cs" />
+    <Compile Include="LegacyThrift\EventStatus.cs" />
+    <Compile Include="LegacyThrift\Priority.cs" />
+    <Compile Include="LegacyThrift\LegacyThriftClient.cs" />
+    <Compile Include="LegacyThrift\ThriftFlumeEvent.cs" />
+    <Compile Include="LegacyThrift\LegacyThriftFlumeEventAdapter.cs" />
+    <Compile Include="LegacyThrift\ThriftFlumeEventServer.cs" />
     <Compile Include="Thrift\ThriftClient.cs" />
+    <Compile Include="Thrift\Status.cs" />
     <Compile Include="Thrift\ThriftFlumeEvent.cs" />
     <Compile Include="Thrift\ThriftFlumeEventAdapter.cs" />
-    <Compile Include="Thrift\ThriftFlumeEventServer.cs" />
+    <Compile Include="Thrift\ThriftSourceProtocol.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Avro\flume.avpr" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

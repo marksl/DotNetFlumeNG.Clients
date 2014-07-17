@@ -19,7 +19,7 @@ namespace DotNetFlumeNG.Client.Core
     {
         Invalid = -1,
 
+        LegacyThrift,
         Thrift,
-        Avro,
     }
 }

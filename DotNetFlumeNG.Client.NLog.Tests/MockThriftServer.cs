@@ -15,6 +15,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+using DotNetFlumeNG.Client.LegacyThrift;
 using Thrift.Server;
 using Thrift.Transport;
 

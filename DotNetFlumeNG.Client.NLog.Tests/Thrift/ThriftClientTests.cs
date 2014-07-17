@@ -14,7 +14,7 @@
 //     limitations under the License.
 
 using System;
-using DotNetFlumeNG.Client.Thrift;
+using DotNetFlumeNG.Client.LegacyThrift;
 using NLog;
 using NUnit.Framework;
 
@@ -42,7 +42,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
         {
             var logEventInfo = new LogEventInfo(LogLevel.Debug, "logger", "message");
             var nLogEventAdapter = new NLogEventAdapter("message", logEventInfo);
-            using (var thriftClient = new ThriftClient("localhost", 9090))
+            using (var thriftClient = new LegacyThriftClient("localhost", 9090))
             {
                 thriftClient.Append(nLogEventAdapter);
             }
@@ -52,7 +52,7 @@ namespace DotNetFlumeNG.Client.NLog.Tests.Thrift
         public void Constructor_NoHost_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new ThriftClient(null, 50));
+                () => new LegacyThriftClient(null, 50));
         }
     }
 }

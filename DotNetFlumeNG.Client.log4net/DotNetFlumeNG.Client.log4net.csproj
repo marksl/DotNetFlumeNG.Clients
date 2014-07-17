@@ -66,11 +66,26 @@
     <Compile Include="..\DotNetFlumeNG.Client.NLog\FlumeClientFactoryThrift.cs">
       <Link>FlumeClientFactoryThrift.cs</Link>
     </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\EventStatus.cs">
-      <Link>Thrift\EventStatus.cs</Link>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\EventStatus.cs">
+      <Link>LegacyThrift\EventStatus.cs</Link>
     </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\Priority.cs">
-      <Link>Thrift\Priority.cs</Link>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\LegacyThriftClient.cs">
+      <Link>LegacyThrift\LegacyThriftClient.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\LegacyThriftFlumeEventAdapter.cs">
+      <Link>LegacyThrift\LegacyThriftFlumeEventAdapter.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\Priority.cs">
+      <Link>LegacyThrift\Priority.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\ThriftFlumeEvent.cs">
+      <Link>LegacyThrift\ThriftFlumeEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\LegacyThrift\ThriftFlumeEventServer.cs">
+      <Link>LegacyThrift\ThriftFlumeEventServer.cs</Link>
+    </Compile>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\Status.cs">
+      <Link>Thrift\Status.cs</Link>
     </Compile>
     <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftClient.cs">
       <Link>Thrift\ThriftClient.cs</Link>
@@ -81,8 +96,8 @@
     <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventAdapter.cs">
       <Link>Thrift\ThriftFlumeEventAdapter.cs</Link>
     </Compile>
-    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftFlumeEventServer.cs">
-      <Link>Thrift\ThriftFlumeEventServer.cs</Link>
+    <Compile Include="..\DotNetFlumeNG.Client.NLog\Thrift\ThriftSourceProtocol.cs">
+      <Link>Thrift\ThriftSourceProtocol.cs</Link>
     </Compile>
     <Compile Include="log4net\FlumeAppender.cs" />
     <Compile Include="log4net\Log4NetEventAdapter.cs" />

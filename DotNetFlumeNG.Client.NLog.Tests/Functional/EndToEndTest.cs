@@ -14,6 +14,7 @@
 //     limitations under the License.
 
 using System.Threading;
+using DotNetFlumeNG.Client.LegacyThrift;
 using NLog;
 using NUnit.Framework;
 

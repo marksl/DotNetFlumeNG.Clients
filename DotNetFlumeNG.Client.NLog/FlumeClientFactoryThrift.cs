@@ -15,9 +15,9 @@
 
 using System;
 using System.Globalization;
-using DotNetFlumeNG.Client.Avro;
 using DotNetFlumeNG.Client.Core;
-using DotNetFlumeNG.Client.Thrift;
+using DotNetFlumeNG.Client.LegacyThrift;
+//using DotNetFlumeNG.Client.Thrift;
 
 namespace DotNetFlumeNG.Client
 {
@@ -29,12 +29,12 @@ namespace DotNetFlumeNG.Client
             {
                 switch (_clientType)
                 {
-                    case ClientType.Thrift:
-                        _client = new ThriftClient(_host, _port);
+                    case ClientType.LegacyThrift:
+                        _client = new LegacyThriftClient(_host, _port);
                         break;
 
-                    case ClientType.Avro:
-                        _client = new AvroClient(_host, _port);
+                    case ClientType.Thrift:
+                        _client = new Thrift.ThriftClient(_host, _port);
                         break;
 
                     default:
