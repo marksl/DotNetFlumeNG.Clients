@@ -17,7 +17,6 @@ using System;
 using System.Globalization;
 using DotNetFlumeNG.Client.Core;
 using DotNetFlumeNG.Client.LegacyThrift;
-//using DotNetFlumeNG.Client.Thrift;
 
 namespace DotNetFlumeNG.Client
 {

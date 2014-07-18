@@ -1,10 +1,12 @@
 # .Net FlumeNG Clients
 
-Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. DotNet
+Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data.
 
-DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to flume from C# easy. It uses the Flume legacy thrift support because currently C# Avro RPC support is lacking.
+DotNetFlumeNG Clients provide targets for NLog and log4net to make connecting to flume from C# easy. 
 
-## NLog 0.2.3.0 Installation
+The ThriftSource and ThriftLegacySource are both supported. For Flume 1.4+ it is recommended you use the ThriftSource.
+
+## NLog 0.4.0.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
@@ -45,26 +47,27 @@ Multiple flume sources are supported using NLog's Round Robin wrapper.
 </target>
 ```
 
-Modify your Flume .conf file. Add the ThriftLegacySource.  
+Modify your Flume .conf file. Add the ThriftSource.  
 
 ```
-agent.sources = legacysource-1
-agent.channels = memoryChannel-1
-agent.sinks = Console
+# test.conf
+a1.channels = c1
+a1.sources = r1
+a1.sinks = k1
 
-# For Flume 1.3 and earlier use agent.sources.legacysource-1.type = org.apache.flume.source.thriftLegacy.ThriftLegacySource
-agent.sources.legacysource-1.type = thrift
-agent.sources.legacysource-1.host = localhost
-agent.sources.legacysource-1.port = 9090
-agent.sources.legacysource-1.channels = memoryChannel-1
+a1.channels.c1.type = memory
 
-agent.channels.memoryChannel-1.type = memory
+a1.sources.r1.channels = c1
+a1.sources.r1.type = thrift
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.port = 9090
 
-agent.sinks.Console.channel = memoryChannel-1
-agent.sinks.Console.type = logger
+a1.sinks.k1.channel = c1
+a1.sinks.k1.type = logger
 ```
-Note: A good site for how to install Flume on windows can be found here: 
-http://mapredit.blogspot.ca/2012/07/run-flume-13x-on-windows.html  
+
+Launch Flume from the command line. Here's an example using Java 7 Update 65 and Flume 1.5:
+"C:\Program Files\Java\jdk1.7.0_65\bin\java.exe" -Dlog4j.configuration=file:///%CD%\conf\log4j.properties -cp "C:\apache-flume-1.5.0-bin\lib\*" org.apache.flume.node.Application -f C:\apache-flume-1.5.0-bin\conf\test.conf -n a1
 
 Write NLog logging code as usual  
 
@@ -84,7 +87,7 @@ public class MyClass
 }
 ```
 
-## log4net 0.2.3.0 Installation
+## log4net 0.4.0.0 Installation
 
 Type the following in the Visual Studio Package Manager Console.  
 
