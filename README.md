@@ -67,7 +67,10 @@ a1.sinks.k1.type = logger
 ```
 
 Launch Flume from the command line. Here's an example using Java 7 Update 65 and Flume 1.5:
+
+```
 "C:\Program Files\Java\jdk1.7.0_65\bin\java.exe" -Dlog4j.configuration=file:///%CD%\conf\log4j.properties -cp "C:\apache-flume-1.5.0-bin\lib\*" org.apache.flume.node.Application -f C:\apache-flume-1.5.0-bin\conf\test.conf -n a1
+```
 
 Write NLog logging code as usual  
 
